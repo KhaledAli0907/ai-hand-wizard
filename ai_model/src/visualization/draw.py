@@ -2,7 +2,7 @@ import mediapipe as mp
 import numpy as np
 import cv2
 import config
-from detection.landmarks import finger_state
+from detection.landmarks import detect_gesture, finger_state
 
 
 mp_hands = mp.tasks.vision.HandLandmarksConnections
@@ -72,6 +72,18 @@ def draw_landmarks_on_image(rgb_image, detection_result):
             annotated_image,
             line2,
             (top_x, line_height + 25),
+            cv2.FONT_HERSHEY_DUPLEX,
+            config.FONT_SIZE,
+            config.HANDEDNESS_TEXT_COLOR,
+            config.FONT_THICKNESS,
+            cv2.LINE_AA,
+        )
+        
+        gesture, confidence = detect_gesture(hand_landmarks, handedness[0].category_name)
+        cv2.putText(
+            annotated_image,
+            f"{gesture.capitalize()} ({confidence:.2f})",
+            (top_x, line_height + 50),
             cv2.FONT_HERSHEY_DUPLEX,
             config.FONT_SIZE,
             config.HANDEDNESS_TEXT_COLOR,
