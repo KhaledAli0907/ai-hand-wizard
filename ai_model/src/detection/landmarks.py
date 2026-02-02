@@ -34,6 +34,6 @@ def finger_state(landmarks) -> dict[str, bool]:
             landmarks, HandLandmark.RING_FINGER_TIP, HandLandmark.RING_FINGER_MCP
         ),
         "pinky": is_finger_up(
-            landmarks, HandLandmark.PINKY_FINGER_TIP, HandLandmark.PINKY_FINGER_MCP
+            landmarks, HandLandmark.PINKY_TIP, HandLandmark.PINKY_MCP
         ),
     }
